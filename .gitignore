@@ -1,0 +1,14 @@
+# Secrets and credentials (never commit)
+.env
+.env.*
+!.env.example
+client_secret*.json
+
+# Python
+__pycache__/
+.venv/
+env/
+
+# Obsidian personal state (commit the rest of brain/.obsidian/)
+brain/.obsidian/workspace*.json
+brain/.obsidian/cache
