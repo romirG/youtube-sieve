@@ -44,6 +44,21 @@ Planned as the project grows: `src/` (server code), `tests/`, `skills/` (Agent S
    - *Dependency inversion*: business logic depends on abstractions; concrete services are injected through constructors, never created inside the logic.
 5. **Follow established design practice:** clear names, small functions, no hidden global state, explicit error handling, and design patterns only where they remove real complexity.
 6. **Record every design decision in the knowledge base.** When you choose between alternatives (a library, an algorithm, a data model, an interface, a trade-off), write a `decision` note in `brain/` following `brain/AGENTS.md`, and link it from the pull request. Significant decisions also get an Architecture Decision Record in `docs/adr/` that cites the note.
+7. **Never hardcode to make something pass.** No special cases for particular inputs, IDs or test data, and no logic that detects it is running under test. Fix the real behaviour instead.
+8. **No magic values.** Limits, thresholds, weights, timeouts and quota costs live in named constants or configuration, never inline in logic.
+9. **Design for scale.** Do not assume small inputs: paginate API results, batch requests (the YouTube API accepts up to 50 IDs per call), bound memory use, cache where it saves quota, and avoid algorithms whose cost grows quadratically with data that can grow. Keep request handling stateless so the server can run as several instances.
+
+## Testing
+
+Every new feature and every bug fix ships with rigorous unit tests in the same pull request.
+
+1. **Write the test first** where practical (red, green, refactor), and watch it fail before making it pass.
+2. **Cover more than the happy path:** boundary values, empty and maximum inputs, invalid and malformed input, and error paths (for example `quotaExceeded`, expired tokens, private or deleted videos).
+3. **Test behaviour, not implementation.** Assert on observable results so refactoring does not break tests.
+4. **Keep tests deterministic and isolated:** no live network or YouTube API calls, no dependence on time, order or shared state. Use fakes behind the provider interfaces and recorded fixtures.
+5. **Never weaken, skip or delete a test to make it pass.** If a test is wrong, fix it in a separate, explained commit.
+6. **Every fixed bug gets a regression test** that fails without the fix.
+7. **No real personal data** in fixtures; use synthetic values.
 
 ## Where to find things
 
