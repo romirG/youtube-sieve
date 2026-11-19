@@ -19,7 +19,7 @@ Rules for every note in `brain/`, for people and AI agents alike. CI validates n
 
 - Lower-case kebab-case, `.md` extension: `tfidf-cosine-similarity.md`.
 - **Unique across the whole vault**, because `[[wikilinks]]` resolve by file name.
-- AI-session notes: `ai-session-YYYY-MM-DD-<slug>.md`. Review notes: `review-<stage-or-release>.md`. Meeting notes: `meeting-YYYY-MM-DD.md`.
+- AI-session notes: `ai-session-YYYY-MM-DD-<slug>.md`. Review notes: `review-<stage-or-release>.md`. Meeting notes: `meeting-YYYY-MM-DD.md`. Decision notes: `decision-<slug>.md`.
 
 ## Frontmatter
 
@@ -42,7 +42,7 @@ sources: [https://example.org/article]
 | Field | Required | Allowed values |
 |---|---|---|
 | `title` | yes | Non-empty text |
-| `type` | yes | `research`, `concept`, `ai-session`, `review`, `meeting` |
+| `type` | yes | `research`, `concept`, `decision`, `ai-session`, `review`, `meeting` |
 | `status` | yes | `inbox`, `distilled`, `archived` |
 | `created` | yes | Date, `YYYY-MM-DD` |
 | `updated` | no | Date, `YYYY-MM-DD`, not before `created` |
@@ -57,6 +57,7 @@ sources: [https://example.org/article]
 
 - **research**: what an external source says, summarised in your own words, with sources.
 - **concept**: an idea explained for the team (e.g. PARA, quota costs), linking the research behind it.
+- **decision**: a design decision: context, options considered, the choice, and its consequences. File it in the `areas/` or `projects/` folder it concerns, and link the issue or PR that implements it. Significant decisions are also recorded as an ADR in `docs/adr/` that cites this note.
 - **ai-session**: a significant AI-assisted session: goal, what worked, what failed, follow-ups.
 - **review**: end-of-stage review: what worked, what did not, what to change.
 - **meeting**: decisions and action items from a team meeting.

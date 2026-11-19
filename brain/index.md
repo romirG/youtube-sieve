@@ -15,7 +15,7 @@ Entry point for the team's knowledge base. Notes are organised with PARA:
 
 Every run of a brain skill is recorded in [[log]].
 
-**Before adding or editing notes, read the schema: [[AGENTS]].** Start new notes from a template in [templates/](templates/): research, concept, AI session, review, meeting.
+**Before adding or editing notes, read the schema: [[AGENTS]].** Start new notes from a template in [templates/](templates/): research, concept, decision, AI session, review, meeting.
 
 ## Projects
 

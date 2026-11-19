@@ -31,6 +31,20 @@ Planned as the project grows: `src/` (server code), `tests/`, `skills/` (Agent S
 8. **Knowledge base changes** follow `brain/AGENTS.md` and go through pull requests like code.
 9. **Disclose AI assistance** in the pull request. A human reviews every change before merge.
 
+## Code and design
+
+1. **Read before you write.** Before adding code, read the modules it touches and search the codebase for existing functions, classes and utilities that already do the job. Reuse or extend them.
+2. **No duplicate or redundant code.** Do not create a second function that does what an existing one does. If two pieces of code overlap, consolidate them in the same pull request or open an issue to do so.
+3. **Keep the code modular.** Each module has one clear purpose and a small public interface. Keep transport (MCP, HTTP), business logic, and external services (YouTube API, storage) in separate layers.
+4. **Apply SOLID carefully:**
+   - *Single responsibility*: a module or class has one reason to change.
+   - *Open/closed*: add behaviour by extending (new class, new strategy), not by editing stable code paths with conditionals.
+   - *Liskov substitution*: every implementation of an interface (for example a real and a fake YouTube provider) is interchangeable without callers changing.
+   - *Interface segregation*: prefer small, focused interfaces over one large one.
+   - *Dependency inversion*: business logic depends on abstractions; concrete services are injected through constructors, never created inside the logic.
+5. **Follow established design practice:** clear names, small functions, no hidden global state, explicit error handling, and design patterns only where they remove real complexity.
+6. **Record every design decision in the knowledge base.** When you choose between alternatives (a library, an algorithm, a data model, an interface, a trade-off), write a `decision` note in `brain/` following `brain/AGENTS.md`, and link it from the pull request. Significant decisions also get an Architecture Decision Record in `docs/adr/` that cites the note.
+
 ## Where to find things
 
 | Need | Look in |
