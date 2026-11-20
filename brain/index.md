@@ -21,4 +21,6 @@ Every run of a brain skill is recorded in [[log]].
 
 ## Areas
 
+- [[decision-ci-and-validation-tooling]]: why Ruff, pytest, Gitleaks and a custom vault validator
+
 ## Resources
