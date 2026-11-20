@@ -79,6 +79,22 @@ AI coding assistants are welcome, but the author is responsible for every merged
 - Never paste secrets, tokens or credentials into an AI tool.
 - Record significant AI sessions in the knowledge base (`brain/`).
 
+## Running checks locally
+
+CI runs these on every pull request; run them before you push. You need Python 3.12 and pip 25.1 or newer.
+
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install --group dev
+
+ruff check .                      # lint
+ruff format .                     # format (CI runs: ruff format --check .)
+pytest --cov                      # tests, fails below 90% coverage
+python -m tools.validate_brain    # knowledge-base schema
+```
+
 ## Security
 
 Never commit secrets, OAuth client files, tokens or real user data. `.env` and `client_secret*.json` are ignored by git; use `.env.example` for documented placeholders.

@@ -12,3 +12,9 @@ env/
 # Obsidian personal state (commit the rest of brain/.obsidian/)
 brain/.obsidian/workspace*.json
 brain/.obsidian/cache
+
+# Tool caches and reports
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/

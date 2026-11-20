@@ -12,12 +12,17 @@ Instructions for AI coding agents (and a quick orientation for humans) working i
 AGENTS.md            ← this file
 CONTRIBUTING.md      ← workflow: issues, branches, commits, PRs, review
 CHANGELOG.md         ← Keep a Changelog; update under [Unreleased] in every PR
+pyproject.toml       ← project metadata, pinned dev tools, Ruff/pytest/coverage settings
 brain/               ← team knowledge base (Obsidian vault, PARA)
   AGENTS.md          ← vault schema: read before creating or editing notes
+tools/               ← repository tooling (e.g. validate_brain.py, the vault validator)
+tests/               ← pytest suite, mirroring the source layout
 .github/             ← PR template, issue forms, CI workflows
 ```
 
-Planned as the project grows: `src/` (server code), `tests/`, `skills/` (Agent Skills), `docs/` (SRS, architecture, `docs/adr/`).
+Planned as the project grows: `src/` (server code), `skills/` (Agent Skills), `docs/` (SRS, architecture, `docs/adr/`).
+
+Before pushing, run the checks listed in `CONTRIBUTING.md` under *Running checks locally*; CI runs the same ones.
 
 ## Rules for agents
 

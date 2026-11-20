@@ -1,6 +1,6 @@
 # Knowledge-base schema
 
-Rules for every note in `brain/`, for people and AI agents alike. CI validates notes against this schema.
+Rules for every note in `brain/`, for people and AI agents alike. CI validates notes against this schema with `tools/validate_brain.py`; change the validator and its tests in the same pull request as any rule here.
 
 ## Folders (PARA)
 
