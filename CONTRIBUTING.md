@@ -93,7 +93,12 @@ ruff check .                      # lint
 ruff format .                     # format (CI runs: ruff format --check .)
 pytest --cov                      # tests, fails below 90% coverage
 python -m tools.validate_brain    # knowledge-base schema
+python -m tools.validate_skills   # Agent Skills: specification + cites a distilled note
 ```
+
+## Skills
+
+Agent Skills live in `skills/<name>/SKILL.md` and follow the [Agent Skills specification](https://agentskills.io/specification). Each skill must cite at least one distilled note in `brain/` with a `[[wikilink]]` in its body. CI checks both.
 
 ## Security
 
