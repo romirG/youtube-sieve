@@ -17,3 +17,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `brain-ingest` skill for capturing sources as schema-valid inbox notes (#9).
 - `tools/validate_skills.py` and an *Agent Skills* CI job: specification checks via `skills-ref`, plus each skill must cite a distilled note (#9).
 - Concept note on the PARA method and a decision note on skill validation (#9).
+- Research notes on MCP fundamentals, MCP authorization and the Agent Skills format (#11).
