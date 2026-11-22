@@ -21,3 +21,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Research notes on YouTube Data API quota costs, API methods, error reasons and playlist creation (#12).
 - Application package `youtube_sieve` in a `src/` layout, with a pure `domain` layer (#17).
 - ISO 8601 duration parsing for YouTube video lengths, `parse_duration` (#17).
+- `docs/adr/` with ADR 0001 (enforce quota budgets before API calls) and ADR 0002 (browser-only playlist confirmation), and their decision notes (#19).
