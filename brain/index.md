@@ -22,5 +22,8 @@ Every run of a brain skill is recorded in [[log]].
 ## Areas
 
 - [[decision-ci-and-validation-tooling]]: why Ruff, pytest, Gitleaks and a custom vault validator
+- [[decision-skill-validation]]: why skills are checked with skills-ref plus a citation rule
 
 ## Resources
+
+- [[para-method]]: how PARA works and how this vault applies it
