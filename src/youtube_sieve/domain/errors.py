@@ -7,3 +7,11 @@ class DomainError(Exception):
 
 class InvalidDurationError(DomainError, ValueError):
     """A duration string is malformed or cannot be converted to an exact number of seconds."""
+
+
+class InvalidSimilarityConfigError(DomainError, ValueError):
+    """Similarity settings are out of range, such as a negative field weight."""
+
+
+class InvalidDocumentError(DomainError, ValueError):
+    """A document to compare is malformed, such as having an empty id."""
