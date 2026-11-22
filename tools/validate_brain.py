@@ -17,6 +17,9 @@ from pathlib import Path, PurePosixPath
 
 import yaml
 
+from tools.problems import Problem
+from tools.reporting import report
+
 # --- Schema (mirrors brain/AGENTS.md; change both together) --------------------------------
 
 DEFAULT_VAULT = Path("brain")
@@ -33,6 +36,7 @@ FOLDER_STATUS = {
     "archive": "archived",
 }
 STATUSES = frozenset(FOLDER_STATUS.values())
+DISTILLED_STATUS = "distilled"
 INDEXED_FOLDERS = frozenset({"projects", "areas", "resources"})
 REQUIRED_FIELDS = ("title", "type", "status", "created", "authors")
 TYPES_REQUIRING_SOURCES = frozenset({"research"})
@@ -65,15 +69,6 @@ FRONTMATTER_DELIMITER = "---"
 # --- Data -----------------------------------------------------------------------------------
 
 
-@dataclass(frozen=True, order=True)
-class Problem:
-    path: PurePosixPath
-    message: str
-
-    def __str__(self) -> str:
-        return f"{self.path}: {self.message}"
-
-
 @dataclass
 class Note:
     path: PurePosixPath  # relative to the vault
@@ -102,6 +97,14 @@ class Vault:
 
     def known_targets(self) -> set[str]:
         return {n.stem.casefold() for n in self.notes} | self.attachment_names
+
+    def distilled_names(self) -> set[str]:
+        """Case-folded names of notes whose status is 'distilled'."""
+        return {
+            n.stem.casefold()
+            for n in self.notes
+            if not n.is_special and (n.frontmatter or {}).get("status") == DISTILLED_STATUS
+        }
 
     def index(self) -> Note | None:
         return next((n for n in self.notes if n.is_special and n.path.name == INDEX_FILE), None)
@@ -383,15 +386,7 @@ def validate(root: Path) -> list[Problem]:
 def main(argv: list[str] | None = None) -> int:
     args = sys.argv[1:] if argv is None else argv
     root = Path(args[0]) if args else DEFAULT_VAULT
-    problems = validate(root)
-    for problem in problems:
-        print(problem)
-    if problems:
-        noun = "problem" if len(problems) == 1 else "problems"
-        print(f"\n{len(problems)} {noun} found in {root}. See brain/AGENTS.md.")
-        return 1
-    print(f"{root}: no problems found.")
-    return 0
+    return report(validate(root), root, "brain/AGENTS.md")
 
 
 if __name__ == "__main__":
