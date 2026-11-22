@@ -26,6 +26,7 @@ Every run of a brain skill is recorded in [[log]].
 - [[decision-package-layout]]: `src/` layout and a pure domain core
 - [[decision-quota-budget-enforcement]]: reject workflows before any API call if they would exceed the quota budget (ADR 0001)
 - [[decision-browser-only-playlist-confirmation]]: playlists are confirmed only in the owner's browser (ADR 0002)
+- [[decision-tfidf-similarity]]: how metadata similarity is computed, and why without scikit-learn
 
 ## Resources
 
