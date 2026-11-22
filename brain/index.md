@@ -23,6 +23,7 @@ Every run of a brain skill is recorded in [[log]].
 
 - [[decision-ci-and-validation-tooling]]: why Ruff, pytest, Gitleaks and a custom vault validator
 - [[decision-skill-validation]]: why skills are checked with skills-ref plus a citation rule
+- [[decision-package-layout]]: `src/` layout and a pure domain core
 
 ## Resources
 

@@ -19,3 +19,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Concept note on the PARA method and a decision note on skill validation (#9).
 - Research notes on MCP fundamentals, MCP authorization and the Agent Skills format (#11).
 - Research notes on YouTube Data API quota costs, API methods, error reasons and playlist creation (#12).
+- Application package `youtube_sieve` in a `src/` layout, with a pure `domain` layer (#17).
+- ISO 8601 duration parsing for YouTube video lengths, `parse_duration` (#17).
