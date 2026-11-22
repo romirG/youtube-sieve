@@ -87,7 +87,7 @@ CI runs these on every pull request; run them before you push. You need Python 3
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install --group dev
+python -m pip install --group dev -e .   # dev tools + the package in editable mode
 
 ruff check .                      # lint
 ruff format .                     # format (CI runs: ruff format --check .)

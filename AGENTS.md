@@ -15,13 +15,15 @@ CHANGELOG.md         ← Keep a Changelog; update under [Unreleased] in every PR
 pyproject.toml       ← project metadata, pinned dev tools, Ruff/pytest/coverage settings
 brain/               ← team knowledge base (Obsidian vault, PARA)
   AGENTS.md          ← vault schema: read before creating or editing notes
+src/youtube_sieve/   ← application package
+  domain/            ← pure business logic: no I/O, network or framework imports
 skills/              ← Agent Skills, one folder per skill (e.g. brain-ingest)
 tools/               ← repository tooling: vault and skill validators
 tests/               ← pytest suite, mirroring the source layout
 .github/             ← PR template, issue forms, CI workflows
 ```
 
-Planned as the project grows: `src/` (server code), `docs/` (SRS, architecture, `docs/adr/`).
+Planned as the project grows: more layers under `src/youtube_sieve/` (services, providers, MCP transport) and `docs/` (SRS, architecture, `docs/adr/`).
 
 Before pushing, run the checks listed in `CONTRIBUTING.md` under *Running checks locally*; CI runs the same ones.
 
