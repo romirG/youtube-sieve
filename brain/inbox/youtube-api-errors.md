@@ -31,7 +31,7 @@ The errors reference lists each error by an HTTP status, an error type (such as 
 
 **Method-specific errors**
 - `search.list`: 400 `invalidChannelId`, `invalidLocation`, `invalidRelevanceLanguage`, and `invalidSearchFilter` (video-only filters need `type=video`).
-- `videos.list`: 404 `videoNotFound`; 403 `forbidden` for owner-only parts such as `fileDetails` or `suggestions`. There is no reason for "private video". In practice a private or deleted video is probably just missing from the response, which we must confirm with a recorded fixture. The newer `videos.batchGetStats` reports such IDs explicitly in `summary.failedVideoIds` ([[youtube-api-quota-costs]]).
+- `videos.list`: 404 `videoNotFound`; 403 `forbidden` for owner-only parts such as `fileDetails` or `suggestions`. There is no reason for "private video". In practice a private or deleted video is probably just missing from the response, which we must confirm with a recorded fixture. The newer `videos.batchGetStats` reports such IDs explicitly in `summary.failedVideoIds` ([[youtube-api-methods]]).
 - `channels.list`: 404 `channelNotFound`, `categoryNotFound`; 403 `channelForbidden`; 400 `invalidCriteria` (only one filter allowed).
 - `playlists.insert` and `playlistItems.insert`: covered in [[youtube-playlist-creation]]. Examples are `maxPlaylistExceeded`, `playlistContainsMaximumNumberOfVideos`, `playlistNotFound`, `videoNotFound`, `manualSortRequired` and `videoAlreadyInPlaylist`.
 

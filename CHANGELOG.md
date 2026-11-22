@@ -18,4 +18,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `tools/validate_skills.py` and an *Agent Skills* CI job: specification checks via `skills-ref`, plus each skill must cite a distilled note (#9).
 - Concept note on the PARA method and a decision note on skill validation (#9).
 - Research notes on MCP fundamentals, MCP authorization and the Agent Skills format (#11).
-- Research notes on YouTube Data API quota costs, error reasons and playlist creation (#12).
+- Research notes on YouTube Data API quota costs, API methods, error reasons and playlist creation (#12).
