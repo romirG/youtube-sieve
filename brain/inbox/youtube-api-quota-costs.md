@@ -16,6 +16,11 @@ sources:
   - https://developers.google.com/youtube/v3/docs/channels/list
   - https://developers.google.com/youtube/v3/docs/playlists/list
   - https://developers.google.com/youtube/v3/docs/playlistItems/list
+  - https://developers.google.com/youtube/data/reference/rest/v3/videos/
+  - https://developers.google.com/youtube/data/reference/rest/v3/search/
+  - https://developers.google.com/youtube/data/reference/rest/v3/videos/list
+  - https://developers.google.com/youtube/data/reference/rest/v3/search/list
+  - https://developers.google.com/youtube/data/reference/rest/v3/videos/batchGetStats
 ---
 
 # YouTube Data API quota costs
@@ -66,6 +71,8 @@ All the read methods below share some rules. Each takes a required `part` parame
   - A non-default `order` may give a smaller or incomplete result set.
   - Basic searches work with an API key. `forMine` and similar filters need OAuth.
   - The page does not mention `relatedToVideoId`, so we cannot rely on a related-videos search.
+  - The REST reference warns that `order=date` is not reliable for finding a channel's latest uploads. It recommends `playlistItems.list` on the channel's uploads playlist instead, which is also far cheaper for us (see `channels.list` below).
+  - Endpoint: `GET https://www.googleapis.com/youtube/v3/search`, with no request body. The response is `youtube#searchListResponse`, with `regionCode` (default `US`), `pageInfo` and `items`. `totalResults` is capped at 1,000,000.
 - **`videos.list`: enriching and ranking videos (FR-3, FR-4)**
   - Takes exactly one filter:
     - `id`: a comma-separated list of video IDs;
@@ -79,7 +86,18 @@ All the read methods below share some rules. Each takes a required `part` parame
     - `status`: `privacyStatus`, `uploadStatus`, `embeddable`, `madeForKids`, `license`.
     - `topicDetails.topicCategories`: Wikipedia URLs.
   - Counts are strings and may be missing, so the parser must cope with absent values.
+  - Endpoint: `GET https://www.googleapis.com/youtube/v3/videos`, with no request body. The response is `youtube#videoListResponse`.
+  - The REST schema also lists newer fields: `status.containsSyntheticMedia` (altered or synthetic content), `paidProductPlacementDetails` and `brandPartner`. These could become ranking signals or filters later.
+  - `snippet.title` is at most 100 characters, the description at most 5,000 bytes and the tags at most 500 characters in total. These bound how much text we store per video.
   - Owner-only parts (`fileDetails`, `processingDetails`, `suggestions`) return 403. We never request them.
+- **`videos.batchGetStats`: a lighter statistics lookup, newer than the other methods**
+  - It is listed in the REST reference for `videos` but not in the older `/youtube/v3/docs/` pages. It is called as `GET https://www.googleapis.com/youtube/v3/videos:batchGetStats` and costs 1 unit.
+  - It takes a required `id` (comma-separated video IDs; no maximum is stated) and `part`, which can be `contentDetails`, `id`, `snippet` or `statistics`. There is no paging.
+  - Public videos need no sign-in. Non-public videos need OAuth with one of the `youtube`, `youtube.force-ssl`, `youtube.readonly` or `youtubepartner` scopes.
+  - Each item gives `snippet.publishTime`, `statistics.viewCount`, `likeCount` and `commentCount` as numbers rather than strings, and `contentDetails.duration` plus **`durationMillis`**, which saves us parsing ISO 8601.
+  - The response ends with a **`summary`**: `requestedVideoCount`, `succeededVideoCount`, `failedVideoCount` and **`failedVideoIds`**. This tells us exactly which IDs could not be returned, such as private or deleted videos, instead of leaving us to infer it from what is missing.
+  - The page says `viewCount` includes "co-views" when several people watch together on a TV.
+  - It has no title, description or tags. So it can replace `videos.list` only where we need numbers alone, for example refreshing statistics for cached videos. It should be tried against a recorded fixture before we depend on it.
 - **`channels.list`: channel context for ranking and similar-channel features**
   - Takes exactly one filter: `id` (comma-separated), `forHandle` (a leading `@` is allowed), `forUsername`, or `mine` (OAuth).
   - Parts include `snippet`, `statistics`, `contentDetails`, `status` and `topicDetails`.
