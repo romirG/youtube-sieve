@@ -36,7 +36,7 @@ Option 2, in `youtube_sieve.domain.similarity`:
 - Matching is lexical: "car" and "automobile" do not match. Tags and titles usually share vocabulary within a topic, so this is acceptable for now, and a different scorer can be added later behind the same interface.
 - Non-text signals (same category, same language, duration), low-confidence flags and recommendation profiles build on these scores in later issues.
 - All weights and limits are in `SimilarityConfig`, so tuning needs no code change.
-- Romir's research note on TF-IDF (#13) should be linked here once it is merged.
+- See [[tfidf-cosine-similarity]] for a worked IDF example and the interpretation of cosine scores.
 
 ## Related
 - [[index]]
