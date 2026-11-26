@@ -16,3 +16,4 @@ Format: `YYYY-MM-DD | skill | author | what changed | PR`
 | 2026-11-22 | brain-ingest | Devaang-Rastogi | added [[youtube-api-quota-costs]], [[youtube-api-methods]], [[youtube-api-errors]], [[youtube-playlist-creation]] | PR #16 |
 | 2026-11-22 | brain-ingest | romirG | added [[tfidf-cosine-similarity]] | PR pending |
 | 2026-11-26 | brain-ingest | 77-Div-77 | added [[youtube-oauth-scopes-and-identity]], [[youtube-oauth-token-lifecycle]] | PR #28 |
+| 2026-11-27 | brain-ingest | 77-Div-77 | added [[prompt-injection-untrusted-metadata]], [[playlist-confirmation-security]] | PR pending |
