@@ -8,6 +8,9 @@ version = "0.0.0"
 description = "MCP server for focused YouTube playlist curation using the official YouTube Data API v3."
 readme = "README.md"
 requires-python = ">=3.12"
+dependencies = [
+    "tzdata==2026.6",  # time-zone data for platforms without a system database (Windows)
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/youtube_sieve"]

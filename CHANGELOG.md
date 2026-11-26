@@ -23,4 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ISO 8601 duration parsing for YouTube video lengths, `parse_duration` (#17).
 - `docs/adr/` with ADR 0001 (enforce quota budgets before API calls) and ADR 0002 (browser-only playlist confirmation), and their decision notes (#19).
 - TF-IDF and cosine similarity ranking in the domain layer, `rank_by_similarity`, with Unicode-aware tokenisation and weighted fields (#21).
+- Quota arithmetic in the domain layer: cost table with separate unit and search-call pools, worst-case estimates, Pacific-time quota day, budget checks across layered budgets and settlement (#23).
+- `tzdata` runtime dependency so time zones work on Windows (#23).
 - Research note on TF-IDF and cosine similarity (#13).

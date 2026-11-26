@@ -3,6 +3,7 @@ title: Enforce quota budgets before calling the YouTube API
 type: decision
 status: distilled
 created: 2026-11-22
+updated: 2026-11-22
 authors: [sidtricoder]
 tags: [decision, quota, youtube-api]
 requirements: [TQ-6, QM-1, QM-2, QM-3, QM-4, QM-9, FR-5]
@@ -12,7 +13,7 @@ sources: [https://developers.google.com/youtube/v3/determine_quota_cost, https:/
 # Enforce quota budgets before calling the YouTube API
 
 **Status:** accepted
-**Issue / PR:** #19
+**Issue / PR:** #19 (decision), #23 (domain implementation)
 **ADR:** `docs/adr/0001-enforce-quota-budget-before-api-calls.md`
 
 ## Context
@@ -46,6 +47,13 @@ Option 3.
 - Users get a clear, early refusal instead of a confusing failure half-way through.
 - Default values need care. With the SRS defaults, a 50-video playlist (2,550 units) would not fit a 2,500-unit per-user budget; the defaults will be set together when the quota module is built.
 - Request-rate limiting (QM-8) is a separate control and is not covered here.
+
+## Implementation notes (#23)
+- The pure arithmetic lives in `youtube_sieve.domain.quota`: `Cost` (units and search calls), the default cost table, `estimate`, `requests_needed`, `check_budgets` and `settle`. Storage and atomic reservation come later, outside the domain layer.
+- The cost table was re-checked against Google's quota page: `search.list` costs one call from its own bucket and **no units**; the list methods we use cost 1 unit; `playlists.insert` and `playlistItems.insert` cost 50.
+- Google's getting-started page does not say when or in which time zone quotas reset, so the quota time zone is configuration, defaulting to `America/Los_Angeles`.
+- `tzdata` is a runtime dependency, because Windows has no system time-zone database and team members develop on Windows.
+- `settle` reports an **overrun** when actual use exceeds the reservation, so an undercounting estimate shows up as a bug rather than silently overdrawing a budget.
 
 ## Related
 - [[decision-browser-only-playlist-confirmation]]

@@ -15,3 +15,7 @@ class InvalidSimilarityConfigError(DomainError, ValueError):
 
 class InvalidDocumentError(DomainError, ValueError):
     """A document to compare is malformed, such as having an empty id."""
+
+
+class InvalidQuotaError(DomainError, ValueError):
+    """Quota input is invalid, such as a negative cost, a naive datetime or an unknown method."""
