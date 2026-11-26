@@ -24,3 +24,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docs/adr/` with ADR 0001 (enforce quota budgets before API calls) and ADR 0002 (browser-only playlist confirmation), and their decision notes (#19).
 - TF-IDF and cosine similarity ranking in the domain layer, `rank_by_similarity`, with Unicode-aware tokenisation and weighted fields (#21).
 - Research note on TF-IDF and cosine similarity (#13).
+- Research notes on YouTube OAuth scopes and identity, and token expiry and re-authorization (#14).
