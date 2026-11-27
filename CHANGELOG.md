@@ -27,3 +27,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `tzdata` runtime dependency so time zones work on Windows (#23).
 - Research note on TF-IDF and cosine similarity (#13).
 - Research notes on YouTube OAuth scopes and identity, and token expiry and re-authorization (#14).
+- Research notes on prompt injection through YouTube metadata and playlist confirmation security (#14).
