@@ -19,6 +19,8 @@ Every run of a brain skill is recorded in [[log]].
 
 ## Projects
 
+- [[review-stage-1]]: Stage 1 review: what worked, what did not, what to change (SB-2)
+
 ## Areas
 
 - [[decision-ci-and-validation-tooling]]: why Ruff, pytest, Gitleaks and a custom vault validator
