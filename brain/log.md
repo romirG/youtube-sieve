@@ -21,3 +21,4 @@ Format: `YYYY-MM-DD | skill | author | what changed | PR`
 | 2026-11-27 | brain-ingest | 77-Div-77 | added [[prompt-injection-untrusted-metadata]], [[playlist-confirmation-security]] | PR #29 |
 | 2026-11-28 | brain-ingest | sidtricoder | added [[testing-with-fixtures-and-mocks]] | PR #34 |
 | 2026-11-28 | brain-refine | sidtricoder | refined [[agent-skills-format]] → resources/ (trial run of the skill) | PR #61 |
+| 2026-11-28 | brain-query | romirG | Who may confirm a playlist draft under the accepted design? Only the signed-in draft owner can confirm in their browser. The AI presents the approval link and can read the draft status. [[decision-browser-only-playlist-confirmation]] | #49 (PR pending) |
