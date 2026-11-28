@@ -32,6 +32,7 @@ Every run of a brain skill is recorded in [[log]].
 - [[decision-layered-architecture]]: six layers, ports and adapters, and the import rules between them (ADR 0003)
 - [[decision-tech-stack]]: MCP SDK 2.3, FastAPI and httpx2, and what the spike found (ADR 0004)
 - [[decision-youtube-provider-interface]]: separate read and write protocols, bound credentials, metered calls and typed errors (ADR 0005)
+- [[decision-error-catalogue]]: one catalogue of error codes, mapped in the services layer, with a structured error object
 
 ## Resources
 

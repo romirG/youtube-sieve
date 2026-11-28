@@ -358,31 +358,31 @@ class BadRequest(ProviderError):
 
 How Google's responses map to these, based on the errors reference ([`brain/inbox/youtube-api-errors.md`](../../brain/inbox/youtube-api-errors.md)):
 
-| Google response | Raised as | Retried by the provider? | Expected service reaction | Likely SRS code (final list in #43) |
+| Google response | Raised as | Retried by the provider? | Expected service reaction | Code ([errors.md](errors.md)) |
 |---|---|---|---|---|
 | 403 `quotaExceeded`, `dailyLimitExceeded` | `QuotaExhausted(pool)` | No | Mark the pool exhausted until reset (QM-9); stop the workflow | `quota_exceeded` |
-| Meter refuses a request | `QuotaReservationExceeded` | No (nothing was sent) | Treat as an internal error: the estimate was wrong | internal error |
-| 401 invalid or expired token, `authorizationRequired` | `AuthRequired(EXPIRED)` | No | Accounts service refreshes the token once and retries the read; otherwise ask the user to sign in again (AC-11) | HTTP 401 challenge (AC-4) |
-| 401 or 400 `invalid_grant` style revocation | `AuthRequired(REVOKED)` | No | Require re-authorisation (AC-11) | HTTP 401 challenge |
-| 403 `insufficientPermissions` | `AuthRequired(INSUFFICIENT_SCOPE)` | No | Ask for the missing scope | HTTP 403 `insufficient_scope` (IF-5) |
+| Meter refuses a request | `QuotaReservationExceeded` | No (nothing was sent) | Treat as an internal error: the estimate was wrong | `internal_error` |
+| 401 invalid or expired token, `authorizationRequired` | `AuthRequired(EXPIRED)` | No | Accounts service refreshes the token once and retries the read; otherwise ask the user to sign in again (AC-11) | `reauthorization_required` (after one refresh) |
+| 401 or 400 `invalid_grant` style revocation | `AuthRequired(REVOKED)` | No | Require re-authorisation (AC-11) | `reauthorization_required` |
+| 403 `insufficientPermissions` | `AuthRequired(INSUFFICIENT_SCOPE)` | No | Ask for the missing scope | `write_access_required` (writes); `reauthorization_required` (reads) |
 | 401 `youtubeSignupRequired` | `ChannelRequired(NO_CHANNEL)` | No | Writes refused; reads stay available (AC-12) | `channel_required` |
 | 403 `channelClosed`, `channelSuspended`, `authenticatedUserAccountClosed`, `authenticatedUserAccountSuspended` | `ChannelRequired(CLOSED or SUSPENDED)` | No | As above | `channel_required` |
-| 404 `playlistNotFound` on a write; `videoNotFound` on `add_video` | `NotFound` | No | `add_video`: skip that video and report it (FR-5.9). `create_playlist` target missing: stop | `not_found` |
-| A requested ID absent from a list response | not an error: listed in `Lookup.missing` | — | Exclude it (FR-1.6, FR-2.5); for the seed video, return `not_found` (FR-1.2) | `not_found` (seed only) |
-| 403 `playlistContainsMaximumNumberOfVideos` | `WriteRejected(PLAYLIST_FULL)` | No | Stop, mark partial | — |
-| 400 `maxPlaylistExceeded` | `WriteRejected(PLAYLIST_LIMIT)` | No | Refuse creation | — |
-| `videoAlreadyInPlaylist` | `WriteRejected(DUPLICATE_ITEM)` | No | Count as already added (resume case) | — |
-| 403 `forbidden`, `playlistForbidden`, `playlistItemsNotAccessible` | `WriteRejected(FORBIDDEN)` on writes, `AuthRequired(INSUFFICIENT_SCOPE)` on reads | No | Stop | — |
-| 403 `rateLimitExceeded`, `userRateLimitExceeded` | `Transient(outcome_known=True)` after retries | Reads: yes, up to `MAX_READ_RETRIES` (2). Writes: no | Return a retry hint | `rate_limited` |
+| 404 `playlistNotFound` on a write; `videoNotFound` on `add_video` | `NotFound` | No | `add_video`: skip that video and report it (FR-5.9). `create_playlist` target missing: stop | `not_found` for a target; none for a skipped video |
+| A requested ID absent from a list response | not an error: listed in `Lookup.missing` | — | Exclude it (FR-1.6, FR-2.5); for the seed video, return `not_found` (FR-1.2) | none; `not_found` for the seed |
+| 403 `playlistContainsMaximumNumberOfVideos` | `WriteRejected(PLAYLIST_FULL)` | No | Stop, mark partial | `playlist_write_rejected` |
+| 400 `maxPlaylistExceeded` | `WriteRejected(PLAYLIST_LIMIT)` | No | Refuse creation | `playlist_limit_reached` |
+| `videoAlreadyInPlaylist` | `WriteRejected(DUPLICATE_ITEM)` | No | Count as already added (resume case) | none (counted as added) |
+| 403 `forbidden`, `playlistForbidden`, `playlistItemsNotAccessible` | `WriteRejected(FORBIDDEN)` on writes, `AuthRequired(INSUFFICIENT_SCOPE)` on reads | No | Stop | `playlist_write_rejected` (writes); `reauthorization_required` (reads) |
+| 403 `rateLimitExceeded`, `userRateLimitExceeded` | `Transient(outcome_known=True)` after retries | Reads: yes, up to `MAX_READ_RETRIES` (2). Writes: no | Return a retry hint | `upstream_unavailable` |
 | 5xx, connection error or timeout on a **read** | `Transient(outcome_known=True)` after retries | Reads: yes, as above | Serve cache where QM-5 allows, else retry hint (RL-2) | `upstream_unavailable` |
 | 5xx on a **write** | `Transient(outcome_known=True)` | No | Stop, mark partial; user may resume (FR-5.17) | `upstream_unavailable` |
-| Timeout or dropped connection on a **write** after the request was sent | `Transient(outcome_known=False)` | No | Mark the draft *uncertain*; ask the user to check YouTube (FR-5.18) | `upstream_unavailable` |
-| Any other 400 (`invalidPageToken`, `invalidPart`, `invalidSearchFilter`, …) | `BadRequest` | No | Log the reason and fail with a generic message | internal error |
-| A response that cannot be parsed | `BadRequest(reason="malformed_response")` | No | As above | internal error |
+| Timeout or dropped connection on a **write** after the request was sent | `Transient(outcome_known=False)` | No | Mark the draft *uncertain*; ask the user to check YouTube (FR-5.18) | `outcome_uncertain` |
+| Any other 400 (`invalidPageToken`, `invalidPart`, `invalidSearchFilter`, …) | `BadRequest` | No | Log the reason and fail with a generic message | `internal_error` |
+| A response that cannot be parsed | `BadRequest(reason="malformed_response")` | No | As above | `internal_error` |
 
 **Retries** apply only to idempotent reads: at most `MAX_READ_RETRIES` (2) extra attempts, exponential backoff from `RETRY_BASE_DELAY_SECONDS` (0.5) with full jitter, honouring `Retry-After` up to `MAX_RETRY_DELAY_SECONDS` (5). Each attempt is charged to the meter (section 7).
 
-The error catalogue issue (#43) decides the final error codes and messages for MCP tools. This table only fixes the provider's side.
+The codes in the last column, their messages and where each is reported are defined in the error catalogue, [errors.md](errors.md) (#43).
 
 ## 9. The in-memory fake
 
