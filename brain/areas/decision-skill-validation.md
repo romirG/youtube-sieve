@@ -3,6 +3,7 @@ title: Validating Agent Skills with skills-ref plus a project citation rule
 type: decision
 status: distilled
 created: 2026-11-22
+updated: 2026-11-28
 authors: [sidtricoder]
 tags: [decision, ci, skills]
 requirements: [SB-3, SB-5]
@@ -33,3 +34,4 @@ Option 2. `tools/validate_skills.py` calls `skills_ref.validate()` for each skil
 ## Related
 - [[index]]
 - [[para-method]]
+- [[agent-skills-format]]

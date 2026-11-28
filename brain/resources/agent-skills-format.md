@@ -1,8 +1,9 @@
 ---
 title: The Agent Skills format
 type: research
-status: inbox
+status: distilled
 created: 2026-11-22
+updated: 2026-11-28
 authors: [sidtricoder]
 tags: [skills, agents]
 requirements: [SK-1, SB-3]
@@ -29,7 +30,7 @@ An Agent Skill is a folder of instructions an AI agent can load when a task call
 | `metadata` | no | a map of string keys to string values |
 | `allowed-tools` | no | experimental; space-separated tools pre-approved for the skill |
 
-No other fields are allowed.
+The specification lists only these fields, and the `skills-ref` validator rejects any other field.
 
 **Progressive disclosure: why skills stay small**
 1. At start-up the agent loads only each skill's `name` and `description` (about 100 tokens per skill).
@@ -45,7 +46,7 @@ So the description decides *whether* a skill is used, and long reference materia
 **Skills and MCP:** the MCP specification lists "Skills over MCP", an extension under development for discovering and using skills through an MCP server.
 
 ## Relevance to youtube-sieve
-- **Skills we must ship:** `video-to-playlist` (SK-1), `local-check`, and the brain skills (`brain-ingest` exists; `brain-refine`, `brain-query` to come). Each needs a precise description naming its trigger, for example "Use when the user wants a playlist built from one video".
+- **Skills we must ship:** `video-to-playlist` (SK-1), `local-check`, and the brain skills (`brain-ingest` and `brain-refine` exist; `brain-query` to come, #49). Each needs a precise description naming its trigger, for example "Use when the user wants a playlist built from one video".
 - **Keep `SKILL.md` lean:** put long material, such as tool parameter tables or constraint rules, in `references/` so the body stays under the recommended size.
 - **Already enforced:** CI validates every skill with `skills-ref` plus our rule that each skill cites a distilled note (SB-3); see [[decision-skill-validation]].
 - **Open question:** whether to also serve `video-to-playlist` through the "Skills over MCP" extension, so MCP clients discover it from the server itself. This depends on client support and the extension's maturity; see [[mcp-fundamentals]].
@@ -53,4 +54,5 @@ So the description decides *whether* a skill is used, and long reference materia
 ## Related
 - [[mcp-fundamentals]]
 - [[para-method]]
+- [[decision-skill-validation]]
 - [[index]]
