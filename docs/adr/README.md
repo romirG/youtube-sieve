@@ -11,6 +11,7 @@ The full reasoning, including every option considered, lives in a **decision not
 | [0001](0001-enforce-quota-budget-before-api-calls.md) | Enforce quota budgets before calling the YouTube API | Accepted |
 | [0002](0002-browser-only-playlist-confirmation.md) | Confirm playlist creation only in the user's browser | Accepted |
 | [0003](0003-layered-architecture.md) | Use a layered ports-and-adapters architecture | Accepted |
+| [0004](0004-tech-stack.md) | Build on MCP Python SDK 2.3, FastAPI and httpx2 | Accepted |
 
 ## Writing a new ADR
 
