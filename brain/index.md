@@ -30,6 +30,7 @@ Every run of a brain skill is recorded in [[log]].
 - [[decision-browser-only-playlist-confirmation]]: playlists are confirmed only in the owner's browser (ADR 0002)
 - [[decision-tfidf-similarity]]: how metadata similarity is computed, and why without scikit-learn
 - [[decision-layered-architecture]]: six layers, ports and adapters, and the import rules between them (ADR 0003)
+- [[decision-tech-stack]]: MCP SDK 2.3, FastAPI and httpx2, and what the spike found (ADR 0004)
 
 ## Resources
 
