@@ -20,3 +20,4 @@ Format: `YYYY-MM-DD | skill | author | what changed | PR`
 | 2026-11-26 | brain-ingest | 77-Div-77 | added [[youtube-oauth-scopes-and-identity]], [[youtube-oauth-token-lifecycle]] | PR #28 |
 | 2026-11-27 | brain-ingest | 77-Div-77 | added [[prompt-injection-untrusted-metadata]], [[playlist-confirmation-security]] | PR #29 |
 | 2026-11-28 | brain-ingest | sidtricoder | added [[testing-with-fixtures-and-mocks]] | PR #34 |
+| 2026-11-28 | brain-refine | sidtricoder | refined [[agent-skills-format]] → resources/ (trial run of the skill) | PR #61 |
