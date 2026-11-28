@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Requirements traceability matrix and contributor guidance for keeping it current (#55).
+
 - Software Requirements Specification in `docs/srs.md`, converted from the Word document, with its figures (#32).
 - Research note on testing against recorded fixtures and mocks, completing #14.
 - ADR 0003: layered ports-and-adapters architecture with fixed import rules, and its decision note (#39).
