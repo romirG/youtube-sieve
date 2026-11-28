@@ -65,6 +65,8 @@ Because pull requests are merged with a merge commit, **every commit on your bra
 
 ## Pull requests
 
+- Update the affected rows in the [traceability matrix](docs/traceability.md) with the issue, PR and verification evidence before requesting review.
+
 - One issue per pull request. Aim for fewer than about 400 changed lines.
 - Fill in every section of the template, and write `Closes #<n>`.
 - Open a **draft** pull request early if you want feedback on direction.

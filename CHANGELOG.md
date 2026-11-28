@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Logical data model with entity relationships, field protection, retention and transaction boundaries (#41).
+- Team skill for answering questions and drafting documents from cited vault notes, with a logged playlist-confirmation trial (#49).
+- Requirements traceability matrix and contributor guidance for keeping it current (#55).
 
 - Software Requirements Specification in `docs/srs.md`, converted from the Word document, with its figures (#32).
 - Research note on testing against recorded fixtures and mocks, completing #14.
