@@ -79,6 +79,16 @@ AI coding assistants are welcome, but the author is responsible for every merged
 - Never paste secrets, tokens or credentials into an AI tool.
 - Record significant AI sessions in the knowledge base (`brain/`).
 
+## One-time git setup
+
+```bash
+git config --global fetch.prune true   # forget branches deleted on GitHub after their PR merges
+git config user.name  "Your Name"      # in this repository: the name and email of your GitHub account,
+git config user.email "you@example.com"  # so commits are attributed to you
+```
+
+Without `fetch.prune`, pulling a branch that was merged and deleted on GitHub fails with "couldn't find remote ref".
+
 ## Running checks locally
 
 CI runs these on every pull request; run them before you push. You need Python 3.12 and pip 25.1 or newer.

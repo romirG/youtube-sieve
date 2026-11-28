@@ -19,12 +19,13 @@ src/youtube_sieve/   ← application package
   domain/            ← pure business logic: no I/O, network or framework imports
 skills/              ← Agent Skills, one folder per skill (e.g. brain-ingest)
 tools/               ← repository tooling: vault and skill validators
+docs/srs.md          ← Software Requirements Specification (requirement IDs: FR-, AC-, QM-, …)
 docs/adr/            ← Architecture Decision Records (see docs/adr/README.md)
 tests/               ← pytest suite, mirroring the source layout
 .github/             ← PR template, issue forms, CI workflows
 ```
 
-Planned as the project grows: more layers under `src/youtube_sieve/` (services, providers, MCP transport) and more of `docs/` (SRS, architecture).
+Planned as the project grows: more layers under `src/youtube_sieve/` (services, providers, MCP transport) and more of `docs/` (architecture).
 
 Before pushing, run the checks listed in `CONTRIBUTING.md` under *Running checks locally*; CI runs the same ones.
 
@@ -74,6 +75,7 @@ Every new feature and every bug fix ships with rigorous unit tests in the same p
 | Need | Look in |
 |---|---|
 | How to contribute | `CONTRIBUTING.md` |
+| What the system must do (requirement IDs) | `docs/srs.md` |
 | Vault structure, note format, linking | `brain/AGENTS.md` |
 | Research and decisions so far | `brain/index.md` |
 | Accepted architecture decisions | `docs/adr/README.md` |
