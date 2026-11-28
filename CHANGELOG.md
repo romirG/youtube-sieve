@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-27
+
+Stage 1 (requirements) release.
+
 ### Added
 
+- Stage 1 review note in `brain/projects/` (#30).
 - Knowledge-base vault in `brain/` with PARA folders, index and run log (#1).
 - Pull request template, issue forms, contributing guide and this changelog (#3).
 - Root `AGENTS.md`, knowledge-base schema in `brain/AGENTS.md` and note templates, including code-design, scalability and testing rules, and decision notes (#5).
@@ -28,3 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Research note on TF-IDF and cosine similarity (#13).
 - Research notes on YouTube OAuth scopes and identity, and token expiry and re-authorization (#14).
 - Research notes on prompt injection through YouTube metadata and playlist confirmation security (#14).
+
+### Fixed
+
+- Run-log row for the TF-IDF research note now links its pull request, #26 (#30).
