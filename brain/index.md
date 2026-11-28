@@ -35,3 +35,4 @@ Every run of a brain skill is recorded in [[log]].
 ## Resources
 
 - [[para-method]]: how PARA works and how this vault applies it
+- [[agent-skills-format]]: SKILL.md fields and limits, progressive disclosure and validation

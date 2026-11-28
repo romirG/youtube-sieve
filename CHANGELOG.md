@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Research note on testing against recorded fixtures and mocks, completing #14.
 - ADR 0003: layered ports-and-adapters architecture with fixed import rules, and its decision note (#39).
 - ADR 0004: MCP Python SDK 2.3, FastAPI and httpx2, from a spike on branch `spike/38-mcp-sdk`, and its decision note (#38).
+- `brain-refine` skill: check inbox notes against sources and later decisions, merge duplicates, fix links, file them in PARA folders and update the index; trial run refined `agent-skills-format` into `resources/` (#48).
 
 ### Changed
 
