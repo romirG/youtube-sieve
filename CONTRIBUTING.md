@@ -9,14 +9,14 @@ Thanks for contributing. This document describes how work moves from an idea to 
 3. **Commit** in small, logical steps using Conventional Commits.
 4. **Open a pull request** that closes the issue, and request a reviewer.
 5. **Address review**, get at least one approval and green checks.
-6. **Squash-merge**, then delete the branch.
+6. **Merge with a merge commit.** GitHub deletes the branch automatically.
 
 `main` is protected: nobody pushes to it directly, including administrators.
 
 ## Issues
 
 - Every change starts with an issue, including documentation and knowledge-base notes.
-- Add labels for **type** (`type: feature`, `type: bug`, `type: docs`, `type: chore`, `type: test`, `type: ci`) and **area** (`area: brain`, `area: mcp`, `area: repo`).
+- Add labels for **type** (`type: feature`, `type: bug`, `type: docs`, `type: chore`, `type: test`, `type: ci`) and **area** (`area: architecture`, `area: brain`, `area: mcp`, `area: repo`).
 - Assign the issue to yourself before starting, so work is not duplicated.
 - Reference SRS requirement IDs (for example `FR-1`) where relevant.
 
@@ -31,7 +31,22 @@ docs/8-tfidf-research-note
 chore/3-governance-files
 ```
 
-Keep branches short-lived. Rebase on `main` if it moves ahead while you work.
+Keep branches short-lived.
+
+### Keeping a branch up to date
+
+If `main` moves ahead while you work, **merge `main` into your branch**. Do not rebase a branch that is already pushed: rebasing rewrites commits that reviewers have commented on and needs a force-push.
+
+```bash
+git fetch origin
+git merge origin/main
+```
+
+The most common conflict is in `CHANGELOG.md`, where several pull requests add a line to the same list under `[Unreleased]`. Keep **both** sides' lines, remove the conflict markers, and make sure each list heading (`### Added`, `### Changed`, `### Fixed`) appears only once.
+
+### Stacked pull requests
+
+When one change builds on another that is still in review, branch from the first branch and open the second pull request against it, not against `main`. Say "Stacked on #n" in the description. Merge them in order: when the first is merged and its branch deleted, GitHub retargets the next one to `main`.
 
 ## Commits
 
@@ -46,12 +61,15 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 Types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`, `ci`, `perf`.
 Write in the imperative mood ("add", not "added"). Do not mix unrelated changes in one commit.
 
+Because pull requests are merged with a merge commit, **every commit on your branch lands on `main` as it is**. Each one must follow this format, not only the pull request title. Tidy work-in-progress commits before asking for review.
+
 ## Pull requests
 
 - One issue per pull request. Aim for fewer than about 400 changed lines.
 - Fill in every section of the template, and write `Closes #<n>`.
 - Open a **draft** pull request early if you want feedback on direction.
-- The pull request title becomes the squash commit on `main`, so it must follow Conventional Commits.
+- The pull request title follows Conventional Commits too; it appears in the merge commit (`Merge pull request #n …`) and in the pull request list.
+- Merge with **Create a merge commit** once the pull request is approved and CI is green. The branch is deleted automatically after merging.
 
 ## Review
 

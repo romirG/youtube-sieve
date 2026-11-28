@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `README.md` now has project status, a quick start, the check commands and links to the key documents (#35).
 - `CONTRIBUTING.md` has a one-time git setup section, including `fetch.prune` (#35).
+- `CONTRIBUTING.md` describes the team's merge-commit workflow: merging `main` into branches, resolving `CHANGELOG.md` conflicts, stacked pull requests, and Conventional Commits on every commit (#37).
 - SRS v0.2: AC-3, AC-6, IF-7 and A-2 follow MCP specification 2026-07-28 (stateless requests; Client ID Metadata Documents preferred over deprecated dynamic client registration). §3.8, QM-1, QM-2, QM-3, QM-6 and DC-2 use Google's two quota allowances: 100 `search.list` calls and 10,000 units a day. The per-account default budget is raised to 3,000 units so the largest playlist fits (#32).
 
 ### Fixed
