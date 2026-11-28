@@ -26,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Run-log rows for the brain-ingest runs in #25 and #27 (#35).
-- Brain validator test now passes on Windows: it compares note paths as `PurePosixPath` (#61).
 
 ## [0.1.0] - 2026-11-27
 

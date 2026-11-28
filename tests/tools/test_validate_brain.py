@@ -1,6 +1,6 @@
 """Unit tests for tools/validate_brain.py, one group per rule in brain/AGENTS.md."""
 
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 
 import pytest
 
@@ -365,7 +365,7 @@ def test_inbox_and_archive_notes_need_not_be_indexed(vault, folder, status):
 def test_problems_include_path_relative_to_vault(vault):
     vault.note("resources/tfidf-cosine-similarity.md", type="essay")
     problem = vb.validate(vault.root)[0]
-    assert problem.path == PurePosixPath("resources/tfidf-cosine-similarity.md")
+    assert problem.path == Path("resources/tfidf-cosine-similarity.md")
 
 
 def test_all_problems_are_reported_not_just_the_first(vault):
